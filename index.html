@@ -1,108 +1,224 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tarjeta de Petición - Iglesia Bautista Bíblica</title>
+
 <style>
-  html, body {
+  /* ====== GLOBAL ====== */
+  :root{
+    --bg-overlay: rgba(0,0,0,.45);
+    --card-bg: rgba(255,255,255,.94);
+    --brand: #0c2b73;       /* azul título */
+    --accent: #0c79ff;      /* azul foco */
+    --success-1:#0a9c4a;    /* botón */
+    --success-2:#067836;    /* botón hover */
+    --ring: rgba(12,121,255,.35);
+    --shadow-1: 0 20px 45px rgba(0,0,0,.35);
+    --shadow-2: 0 10px 20px rgba(0,0,0,.20);
+  }
+
+  html, body{
+    height: 100%;
     margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
-    background: url('IMG_1846.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    color: #0a2b70;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--brand);
   }
-  .container {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    width: 90%;
-    max-width: 420px;
-    padding: 20px;
+
+  /* Fondo original SIN cambios */
+  body{
+    background: url("IMG_1846.jpeg") center/cover fixed no-repeat;
+    display: grid;
+    place-items: center;
   }
-  .logo {
-    text-align: center;
-    margin-bottom: 10px;
+
+  /* Capa oscura para contraste y profundidad */
+  .overlay{
+    position: fixed; inset: 0;
+    background: var(--bg-overlay);
+    backdrop-filter: blur(3px);
+    z-index: 0;
   }
-  .logo img {
-    width: 150px;
-    height: auto;
-  }
-  h2 {
-    text-align: center;
-    color: #0a2b70;
-    margin-bottom: 15px;
-  }
-  label {
-    display: block;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  input, textarea {
+
+  /* ====== CONTENEDOR CON PERSPECTIVA ====== */
+  .stage{
+    position: relative;
+    z-index: 1;
+    perspective: 1200px;             /* <-- activa el efecto 3D */
+    padding: 18px;
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+    max-width: 520px;
   }
-  button {
-    width: 100%;
-    background-color: #0a9c4a;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
+
+  /* ====== TARJETA 3D ====== */
+  .card{
+    background: var(--card-bg);
+    border-radius: 22px;
+    box-shadow: var(--shadow-1);
+    padding: 28px 26px 32px;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg) rotateY(0deg) translateZ(0);
+    transition: transform .45s ease, box-shadow .45s ease;
+    position: relative;
   }
-  button:hover {
-    background-color: #087a3b;
+
+  /* Brillo superior (reflejo sutil) */
+  .card::before{
+    content:"";
+    position:absolute; inset:0;
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,.28), transparent 35%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    transform: translateZ(30px);
   }
-  .verse {
-    text-align: center;
-    font-size: 15px;
-    color: #0a2b70;
-    margin-top: 15px;
-    font-weight: 600;
+
+  /* Sombra flotante adicional */
+  .card::after{
+    content:"";
+    position:absolute; left:10%; right:10%; bottom:-18px; height: 28px;
+    filter: blur(12px);
+    border-radius: 50%;
+    background: rgba(0,0,0,.45);
+    z-index: -1;
+    transition: transform .45s ease, opacity .45s ease;
+    opacity:.85;
+  }
+
+  /* Efecto 3D en hover (ligero) */
+  .card:hover{
+    transform: rotateX(6deg) rotateY(-6deg) translateZ(8px);
+    box-shadow: 0 28px 60px rgba(0,0,0,.42);
+  }
+  .card:hover::after{
+    transform: translateY(6px) scale(1.03);
+    opacity: .9;
+  }
+
+  /* Animación de “respirar” muy sutil */
+  @media (prefers-reduced-motion: no-preference){
+    .card{
+      animation: floaty 5.5s ease-in-out infinite alternate;
+    }
+    .card:hover{ animation: none; }
+  }
+  @keyframes floaty{
+    from{ transform: rotateX(0deg) rotateY(0deg) translateZ(0); }
+    to  { transform: rotateX(3deg) rotateY(-3deg) translateZ(6px); }
+  }
+
+  /* ====== LOGO ====== */
+  .logo{
+    text-align:center; margin-bottom: 10px;
+    transform: translateZ(35px);
+  }
+  .logo img{
+    width: 150px; height:auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+  }
+
+  /* ====== TÍTULO ====== */
+  h2{
+    text-align:center; margin: 8px 0 18px;
+    font-size: 1.75rem; font-weight: 800; letter-spacing:.3px;
+    color: var(--brand);
+    transform: translateZ(30px);
+  }
+
+  /* ====== FORMULARIO ====== */
+  form{ transform: translateZ(25px); }
+
+  label{
+    display:block; font-weight: 700; margin-top: 12px; color: var(--brand);
+  }
+
+  input, textarea{
+    width: 100%; margin-top: 6px; font-size: 16px;
+    padding: 12px 14px; border-radius: 14px;
+    border: 1px solid #c9d5e6; background: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), var(--shadow-2);
+    transition: border-color .25s ease, box-shadow .25s ease, transform .12s ease;
+  }
+  textarea{ resize: vertical; min-height: 110px; }
+
+  input:focus, textarea:focus{
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.6);
+    transform: translateZ(5px);
+  }
+
+  /* ====== BOTÓN ====== */
+  button{
+    width: 100%; margin-top: 18px;
+    padding: 14px 16px; border:0; cursor:pointer;
+    border-radius: 14px; color: #fff; font-weight: 800; font-size: 1.05rem; letter-spacing:.6px;
+    background: linear-gradient(90deg, var(--success-1), var(--success-2));
+    box-shadow: 0 10px 20px rgba(6,120,54,.35), inset 0 -2px 0 rgba(255,255,255,.25);
+    transition: transform .15s ease, box-shadow .25s ease, filter .25s ease;
+    transform: translateZ(20px);
+  }
+  button:hover{
+    filter: brightness(1.03);
+    box-shadow: 0 14px 26px rgba(6,120,54,.45);
+    transform: translateZ(22px) translateY(-1px);
+  }
+  button:active{
+    transform: translateZ(12px) translateY(1px);
+  }
+
+  /* ====== TEXTO BÍBLICO ====== */
+  .verse{
+    text-align:center; margin-top: 18px; font-weight: 600; color: var(--brand);
+    transform: translateZ(18px);
+  }
+  .address{
+    display:block; margin-top: 6px; font-size: .88rem; opacity: .78;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 420px){
+    .card{ padding: 22px 18px 26px; border-radius: 18px; }
+    h2{ font-size: 1.45rem; }
   }
 </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="logo">
-      <img src="logo background removed.png" alt="Logo Iglesia Bautista Bíblica">
-    </div>
-    <h2>TARJETA DE PETICIÓN</h2>
-    <form action="https://formspree.io/f/mqadoabv" method="POST">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
+  <!-- Capa oscura para contraste (no toca tu background) -->
+  <div class="overlay"></div>
 
-      <label for="peticion">Petición:</label>
-      <textarea id="peticion" name="peticion" rows="4" required></textarea>
+  <!-- Escenario 3D -->
+  <div class="stage">
+    <div class="card" aria-label="Tarjeta de petición de oración">
+      <div class="logo">
+        logo background removed.png
+      </div>
 
-      <label for="correo">Correo (opcional):</label>
-      <input type="email" id="correo" name="correo">
+      <h2>TARJETA DE PETICIÓN</h2>
 
-      <label for="telefono">Teléfono (opcional):</label>
-      <input type="tel" id="telefono" name="telefono">
+      https://formspree.io/f/mqadoabv
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" autocomplete="name" required>
 
-      <button type="submit">Enviar Petición</button>
-    </form>
-    <div class="verse">
-      Tarjeta de Petición — “Al que cree todo le es posible.”<br>
-      Marcos 9:23<br>
-      <span style="font-size:13px;">1273 Lamont Ave. NW, Grand Rapids, MI 49504</span>
+        <label for="peticion">Petición:</label>
+        <textarea id="peticion" name="peticion" rows="4" required></textarea>
+
+        <label for="correo">Correo (opcional):</label>
+        <input type="email" id="correo" name="correo" autocomplete="email">
+
+        <label for="telefono">Teléfono (opcional):</label>
+        <input type="tel" id="telefono" name="telefono" autocomplete="tel">
+
+        <button type="submit">Enviar Petición</button>
+      </form>
+
+      <div class="verse">
+        “Al que cree todo le es posible.” — Marcos 9:23
+        <span class="address">1273 Lamont Ave. NW, Grand Rapids, MI 49504</span>
+      </div>
     </div>
   </div>
 </body>
-  <script>
-(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="Vnu439eHlNJHYG0HCSe7r";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-</script>
 </html>
