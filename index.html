@@ -6,85 +6,134 @@
 <title>Tarjeta de Petición - Iglesia Bautista Bíblica</title>
 
 <style>
-  /* ====== GLOBAL ====== */
+  /* ====== Colores y sombras ====== */
   :root{
-    --bg-overlay: rgba(0,0,0,.45);
-    --card-bg: rgba(255,255,255,.94);
     --brand: #0c2b73;
-    --accent:#0c79ff;
+    --accent: #0c79ff;
     --success-1:#0a9c4a;
     --success-2:#067836;
-    --ring: rgba(12,121,255,.35);
+    --overlay: rgba(0,0,0,.45);
+    --card-bg: rgba(255,255,255,.94);
     --shadow-1: 0 20px 45px rgba(0,0,0,.35);
     --shadow-2: 0 10px 20px rgba(0,0,0,.20);
+    --ring: rgba(12,121,255,.35);
   }
 
-  html, body{height:100%;margin:0;font-family:"Segoe UI", Roboto, Arial, sans-serif;color:var(--brand);}
+  /* ====== Layout base ====== */
+  html, body{
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
+    color: var(--brand);
+  }
+
+  /* Tu fondo original (sin cambios) */
   body{
-    background:url("IMG_1846.jpeg") center/cover fixed no-repeat;
-    display:grid;place-items:center;
+    background: url("IMG_1846.jpeg") center/cover fixed no-repeat;
+    display: grid;
+    place-items: center;
   }
 
-  .overlay{position:fixed;inset:0;background:var(--bg-overlay);backdrop-filter:blur(3px);z-index:0;}
+  /* Capa para contraste y profundidad */
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: var(--overlay);
+    backdrop-filter: blur(3px);
+    z-index: 0;
+  }
 
-  .stage{position:relative;z-index:1;perspective:1200px;padding:18px;width:100%;max-width:520px;}
+  /* Escenario con perspectiva (3D) */
+  .stage{
+    position: relative;
+    z-index: 1;
+    perspective: 1000px;
+    width: 100%;
+    max-width: 520px;
+    padding: 18px;
+  }
 
+  /* Tarjeta 3D simple */
   .card{
-    background:var(--card-bg);border-radius:22px;box-shadow:var(--shadow-1);
-    padding:28px 26px 32px;transform-style:preserve-3d;
-    transform:rotateX(0deg) rotateY(0deg) translateZ(0);
-    transition:transform .45s ease, box-shadow .45s ease;position:relative;
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 24px 22px 28px;
+    box-shadow: var(--shadow-1);
+    transform-style: preserve-3d;
+    transition: transform .35s ease, box-shadow .35s ease;
   }
-  .card::before{
-    content:"";position:absolute;inset:0;border-radius:22px;
-    background:linear-gradient(180deg,rgba(255,255,255,.28),transparent 35%);
-    pointer-events:none;mix-blend-mode:screen;transform:translateZ(30px);
-  }
-  .card::after{
-    content:"";position:absolute;left:10%;right:10%;bottom:-18px;height:28px;
-    filter:blur(12px);border-radius:50%;background:rgba(0,0,0,.45);z-index:-1;
-    transition:transform .45s ease, opacity .45s ease;opacity:.85;
-  }
-  .card:hover{transform:rotateX(6deg) rotateY(-6deg) translateZ(8px);box-shadow:0 28px 60px rgba(0,0,0,.42);}
-  .card:hover::after{transform:translateY(6px) scale(1.03);opacity:.9;}
-
-  @media (prefers-reduced-motion:no-preference){
-    .card{animation:floaty 5.5s ease-in-out infinite alternate;}
-    .card:hover{animation:none;}
-  }
-  @keyframes floaty{
-    from{transform:rotateX(0deg) rotateY(0deg) translateZ(0);}
-    to  {transform:rotateX(3deg) rotateY(-3deg) translateZ(6px);}
+  .card:hover{
+    transform: rotateX(5deg) rotateY(-5deg) translateZ(6px);
+    box-shadow: 0 28px 60px rgba(0,0,0,.42);
   }
 
-  .logo{text-align:center;margin-bottom:10px;transform:translateZ(35px);}
-  .logo img{width:150px;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));}
+  /* Encabezado */
+  .logo{
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .logo img{
+    width: 150px; height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+  }
+  h2{
+    text-align:center;
+    margin: 10px 0 16px;
+    font-size: 1.7rem; font-weight: 800; letter-spacing: .3px;
+  }
 
-  h2{text-align:center;margin:8px 0 18px;font-size:1.75rem;font-weight:800;letter-spacing:.3px;color:var(--brand);transform:translateZ(30px);}
-
-  form{transform:translateZ(25px);}
-  label{display:block;font-weight:700;margin-top:12px;color:var(--brand);}
+  /* Formulario */
+  form{ transform: translateZ(10px); }
+  label{
+    display:block; font-weight: 700; margin-top: 10px;
+  }
   input, textarea{
-    width:100%;margin-top:6px;font-size:16px;padding:12px 14px;border-radius:14px;border:1px solid #c9d5e6;background:#fff;
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 6px;
+    border: 1px solid #c9d5e6;
+    border-radius: 12px;
+    font-size: 16px;
+    background:#fff;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.6), var(--shadow-2);
-    transition:border-color .25s ease, box-shadow .25s ease, transform .12s ease;
+    transition: border-color .25s ease, box-shadow .25s ease, transform .12s ease;
   }
-  textarea{resize:vertical;min-height:110px;}
-  input:focus, textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.6);transform:translateZ(5px);}
+  textarea{ resize: vertical; min-height: 110px; }
 
+  input:focus, textarea:focus{
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.6);
+    transform: translateZ(2px);
+  }
+
+  /* Botón */
   button{
-    width:100%;margin-top:18px;padding:14px 16px;border:0;cursor:pointer;border-radius:14px;color:#fff;font-weight:800;font-size:1.05rem;letter-spacing:.6px;
-    background:linear-gradient(90deg,var(--success-1),var(--success-2));
-    box-shadow:0 10px 20px rgba(6,120,54,.35), inset 0 -2px 0 rgba(255,255,255,.25);
-    transition:transform .15s ease, box-shadow .25s ease, filter .25s ease;transform:translateZ(20px);
+    width: 100%;
+    background: linear-gradient(90deg, var(--success-1), var(--success-2));
+    color: #fff; border: none; border-radius: 12px;
+    padding: 14px; font-size: 1.05rem; font-weight: 800; letter-spacing:.5px;
+    margin-top: 16px; cursor: pointer;
+    box-shadow: 0 10px 20px rgba(6,120,54,.35), inset 0 -2px 0 rgba(255,255,255,.25);
+    transition: transform .12s ease, box-shadow .25s ease, filter .25s ease;
   }
-  button:hover{filter:brightness(1.03);box-shadow:0 14px 26px rgba(6,120,54,.45);transform:translateZ(22px) translateY(-1px);}
-  button:active{transform:translateZ(12px) translateY(1px);}
+  button:hover{ filter: brightness(1.03); box-shadow: 0 14px 26px rgba(6,120,54,.45); transform: translateY(-1px); }
+  button:active{ transform: translateY(1px); }
 
-  .verse{text-align:center;margin-top:18px;font-weight:600;color:var(--brand);transform:translateZ(18px);}
-  .address{display:block;margin-top:6px;font-size:.88rem;opacity:.78;}
+  /* Pie con versículo */
+  .verse{
+    text-align: center;
+    font-size: 15px;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+  .address{ display:block; font-size:13px; opacity:.8; margin-top: 4px; }
 
-  @media (max-width:420px){.card{padding:22px 18px 26px;border-radius:18px;}h2{font-size:1.45rem;}}
+  /* Responsive */
+  @media (max-width: 420px){
+    .card{ padding: 20px 16px 24px; }
+    h2{ font-size: 1.5rem; }
+  }
 </style>
 </head>
 
@@ -94,14 +143,14 @@
   <div class="stage">
     <div class="card" aria-label="Tarjeta de petición de oración">
       <div class="logo">
+        <!-- Logo correcto (NO texto suelto) -->
         logo background removed.png
       </div>
 
       <h2>TARJETA DE PETICIÓN</h2>
 
-      <!-- ✅ FORM CORRECTO -->
+      <!-- FORMULARIO CORRECTO -->
       https://formspree.io/f/mqadoabv
-        <!-- Campos visibles -->
         <label for="nombre">Nombre:</label>
         <input id="nombre" name="nombre" type="text" autocomplete="name" required>
 
@@ -114,14 +163,13 @@
         <label for="telefono">Teléfono (opcional):</label>
         <input id="telefono" name="telefono" type="tel" autocomplete="tel">
 
-        <!-- Opcionales útiles para Formspree -->
+        <!-- Opcional: Asunto en el correo que recibes -->
         <input type="hidden" name="_subject" value="Nueva petición de oración">
-        <!-- redirige después de enviar (opcional). Si no tienes /gracias.html, quita esta línea -->
-        <!-- <input type="hidden" name="_redirect" value="https://ibbgrmi.github.io/peticion/gracias.html"> -->
 
-        <!-- Honeypot anti-spam -->
+        <!-- Opcional: honeypot anti-spam -->
         <input type="text" name="_gotcha" style="display:none">
 
+        <!-- Botón dentro del form -->
         <button type="submit">Enviar Petición</button>
       </form>
 
