@@ -1,183 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tarjeta de Petición - Iglesia Bautista Bíblica</title>
-
 <style>
-  /* ====== Colores y sombras ====== */
-  :root{
-    --brand: #0c2b73;
-    --accent: #0c79ff;
-    --success-1:#0a9c4a;
-    --success-2:#067836;
-    --overlay: rgba(0,0,0,.45);
-    --card-bg: rgba(255,255,255,.94);
-    --shadow-1: 0 20px 45px rgba(0,0,0,.35);
-    --shadow-2: 0 10px 20px rgba(0,0,0,.20);
-    --ring: rgba(12,121,255,.35);
-  }
-
-  /* ====== Layout base ====== */
-  html, body{
-    height: 100%;
+  html, body {
     margin: 0;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
-    color: var(--brand);
+    background: url('IMG_1846.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #0a2b70;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
-
-  /* Tu fondo original (sin cambios) */
-  body{
-    background: url("IMG_1846.jpeg") center/cover fixed no-repeat;
-    display: grid;
-    place-items: center;
+  .container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 420px;
+    padding: 20px;
   }
-
-  /* Capa para contraste y profundidad */
-  .overlay{
-    position: fixed;
-    inset: 0;
-    background: var(--overlay);
-    backdrop-filter: blur(3px);
-    z-index: 0;
-  }
-
-  /* Escenario con perspectiva (3D) */
-  .stage{
-    position: relative;
-    z-index: 1;
-    perspective: 1000px;
-    width: 100%;
-    max-width: 520px;
-    padding: 18px;
-  }
-
-  /* Tarjeta 3D simple */
-  .card{
-    background: var(--card-bg);
-    border-radius: 18px;
-    padding: 24px 22px 28px;
-    box-shadow: var(--shadow-1);
-    transform-style: preserve-3d;
-    transition: transform .35s ease, box-shadow .35s ease;
-  }
-  .card:hover{
-    transform: rotateX(5deg) rotateY(-5deg) translateZ(6px);
-    box-shadow: 0 28px 60px rgba(0,0,0,.42);
-  }
-
-  /* Encabezado */
-  .logo{
+  .logo {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
-  .logo img{
-    width: 150px; height: auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+  .logo img {
+    width: 150px;
+    height: auto;
   }
-  h2{
-    text-align:center;
-    margin: 10px 0 16px;
-    font-size: 1.7rem; font-weight: 800; letter-spacing: .3px;
+  h2 {
+    text-align: center;
+    color: #0a2b70;
+    margin-bottom: 15px;
   }
-
-  /* Formulario */
-  form{ transform: translateZ(10px); }
-  label{
-    display:block; font-weight: 700; margin-top: 10px;
+  label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
   }
-  input, textarea{
+  input, textarea {
     width: 100%;
-    padding: 12px 14px;
-    margin-top: 6px;
-    border: 1px solid #c9d5e6;
-    border-radius: 12px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
     font-size: 16px;
-    background:#fff;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.6), var(--shadow-2);
-    transition: border-color .25s ease, box-shadow .25s ease, transform .12s ease;
   }
-  textarea{ resize: vertical; min-height: 110px; }
-
-  input:focus, textarea:focus{
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.6);
-    transform: translateZ(2px);
-  }
-
-  /* Botón */
-  button{
+  button {
     width: 100%;
-    background: linear-gradient(90deg, var(--success-1), var(--success-2));
-    color: #fff; border: none; border-radius: 12px;
-    padding: 14px; font-size: 1.05rem; font-weight: 800; letter-spacing:.5px;
-    margin-top: 16px; cursor: pointer;
-    box-shadow: 0 10px 20px rgba(6,120,54,.35), inset 0 -2px 0 rgba(255,255,255,.25);
-    transition: transform .12s ease, box-shadow .25s ease, filter .25s ease;
+    background-color: #0a9c4a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
   }
-  button:hover{ filter: brightness(1.03); box-shadow: 0 14px 26px rgba(6,120,54,.45); transform: translateY(-1px); }
-  button:active{ transform: translateY(1px); }
-
-  /* Pie con versículo */
-  .verse{
+  button:hover {
+    background-color: #087a3b;
+  }
+  .verse {
     text-align: center;
     font-size: 15px;
+    color: #0a2b70;
     margin-top: 15px;
     font-weight: 600;
   }
-  .address{ display:block; font-size:13px; opacity:.8; margin-top: 4px; }
-
-  /* Responsive */
-  @media (max-width: 420px){
-    .card{ padding: 20px 16px 24px; }
-    h2{ font-size: 1.5rem; }
-  }
 </style>
 </head>
-
 <body>
-  <div class="overlay"></div>
+  <div class="container">
+    <div class="logo">
+      <img src="logo background removed.png" alt="Logo Iglesia Bautista Bíblica">
+    </div>
+    <h2>TARJETA DE PETICIÓN</h2>
+    <form action="https://formspree.io/f/mqadoabv" method="POST">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
 
-  <div class="stage">
-    <div class="card" aria-label="Tarjeta de petición de oración">
-      <div class="logo">
-        <!-- Logo correcto (NO texto suelto) -->
-        logo background removed.png
-      </div>
+      <label for="peticion">Petición:</label>
+      <textarea id="peticion" name="peticion" rows="4" required></textarea>
 
-      <h2>TARJETA DE PETICIÓN</h2>
+      <label for="correo">Correo (opcional):</label>
+      <input type="email" id="correo" name="correo">
 
-      <!-- FORMULARIO CORRECTO -->
-      https://formspree.io/f/mqadoabv
-        <label for="nombre">Nombre:</label>
-        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+      <label for="telefono">Teléfono (opcional):</label>
+      <input type="tel" id="telefono" name="telefono">
 
-        <label for="peticion">Petición:</label>
-        <textarea id="peticion" name="peticion" rows="4" required></textarea>
-
-        <label for="correo">Correo (opcional):</label>
-        <input id="correo" name="correo" type="email" autocomplete="email">
-
-        <label for="telefono">Teléfono (opcional):</label>
-        <input id="telefono" name="telefono" type="tel" autocomplete="tel">
-
-        <!-- Opcional: Asunto en el correo que recibes -->
-        <input type="hidden" name="_subject" value="Nueva petición de oración">
-
-        <!-- Opcional: honeypot anti-spam -->
-        <input type="text" name="_gotcha" style="display:none">
-
-        <!-- Botón dentro del form -->
-        <button type="submit">Enviar Petición</button>
-      </form>
-
-      <div class="verse">
-        “Al que cree todo le es posible.” — Marcos 9:23
-        <span class="address">1273 Lamont Ave. NW, Grand Rapids, MI 49504</span>
-      </div>
+      <button type="submit">Enviar Petición</button>
+    </form>
+    <div class="verse">
+      Tarjeta de Petición — “Al que cree todo le es posible.”<br>
+      Marcos 9:23<br>
+      <span style="font-size:13px;">1273 Lamont Ave. NW, Grand Rapids, MI 49504</span>
     </div>
   </div>
 </body>
+</script>
 </html>
