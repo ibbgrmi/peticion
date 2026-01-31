@@ -10,186 +10,87 @@
   :root{
     --bg-overlay: rgba(0,0,0,.45);
     --card-bg: rgba(255,255,255,.94);
-    --brand: #0c2b73;       /* azul título */
-    --accent: #0c79ff;      /* azul foco */
-    --success-1:#0a9c4a;    /* botón */
-    --success-2:#067836;    /* botón hover */
+    --brand: #0c2b73;
+    --accent:#0c79ff;
+    --success-1:#0a9c4a;
+    --success-2:#067836;
     --ring: rgba(12,121,255,.35);
     --shadow-1: 0 20px 45px rgba(0,0,0,.35);
     --shadow-2: 0 10px 20px rgba(0,0,0,.20);
   }
 
-  html, body{
-    height: 100%;
-    margin: 0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    color: var(--brand);
-  }
-
-  /* Fondo original SIN cambios */
+  html, body{height:100%;margin:0;font-family:"Segoe UI", Roboto, Arial, sans-serif;color:var(--brand);}
   body{
-    background: url("IMG_1846.jpeg") center/cover fixed no-repeat;
-    display: grid;
-    place-items: center;
+    background:url("IMG_1846.jpeg") center/cover fixed no-repeat;
+    display:grid;place-items:center;
   }
 
-  /* Capa oscura para contraste y profundidad */
-  .overlay{
-    position: fixed; inset: 0;
-    background: var(--bg-overlay);
-    backdrop-filter: blur(3px);
-    z-index: 0;
-  }
+  .overlay{position:fixed;inset:0;background:var(--bg-overlay);backdrop-filter:blur(3px);z-index:0;}
 
-  /* ====== CONTENEDOR CON PERSPECTIVA ====== */
-  .stage{
-    position: relative;
-    z-index: 1;
-    perspective: 1200px;             /* <-- activa el efecto 3D */
-    padding: 18px;
-    width: 100%;
-    max-width: 520px;
-  }
+  .stage{position:relative;z-index:1;perspective:1200px;padding:18px;width:100%;max-width:520px;}
 
-  /* ====== TARJETA 3D ====== */
   .card{
-    background: var(--card-bg);
-    border-radius: 22px;
-    box-shadow: var(--shadow-1);
-    padding: 28px 26px 32px;
-    transform-style: preserve-3d;
-    transform: rotateX(0deg) rotateY(0deg) translateZ(0);
-    transition: transform .45s ease, box-shadow .45s ease;
-    position: relative;
+    background:var(--card-bg);border-radius:22px;box-shadow:var(--shadow-1);
+    padding:28px 26px 32px;transform-style:preserve-3d;
+    transform:rotateX(0deg) rotateY(0deg) translateZ(0);
+    transition:transform .45s ease, box-shadow .45s ease;position:relative;
   }
-
-  /* Brillo superior (reflejo sutil) */
   .card::before{
-    content:"";
-    position:absolute; inset:0;
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(255,255,255,.28), transparent 35%);
-    pointer-events: none;
-    mix-blend-mode: screen;
-    transform: translateZ(30px);
+    content:"";position:absolute;inset:0;border-radius:22px;
+    background:linear-gradient(180deg,rgba(255,255,255,.28),transparent 35%);
+    pointer-events:none;mix-blend-mode:screen;transform:translateZ(30px);
   }
-
-  /* Sombra flotante adicional */
   .card::after{
-    content:"";
-    position:absolute; left:10%; right:10%; bottom:-18px; height: 28px;
-    filter: blur(12px);
-    border-radius: 50%;
-    background: rgba(0,0,0,.45);
-    z-index: -1;
-    transition: transform .45s ease, opacity .45s ease;
-    opacity:.85;
+    content:"";position:absolute;left:10%;right:10%;bottom:-18px;height:28px;
+    filter:blur(12px);border-radius:50%;background:rgba(0,0,0,.45);z-index:-1;
+    transition:transform .45s ease, opacity .45s ease;opacity:.85;
   }
+  .card:hover{transform:rotateX(6deg) rotateY(-6deg) translateZ(8px);box-shadow:0 28px 60px rgba(0,0,0,.42);}
+  .card:hover::after{transform:translateY(6px) scale(1.03);opacity:.9;}
 
-  /* Efecto 3D en hover (ligero) */
-  .card:hover{
-    transform: rotateX(6deg) rotateY(-6deg) translateZ(8px);
-    box-shadow: 0 28px 60px rgba(0,0,0,.42);
-  }
-  .card:hover::after{
-    transform: translateY(6px) scale(1.03);
-    opacity: .9;
-  }
-
-  /* Animación de “respirar” muy sutil */
-  @media (prefers-reduced-motion: no-preference){
-    .card{
-      animation: floaty 5.5s ease-in-out infinite alternate;
-    }
-    .card:hover{ animation: none; }
+  @media (prefers-reduced-motion:no-preference){
+    .card{animation:floaty 5.5s ease-in-out infinite alternate;}
+    .card:hover{animation:none;}
   }
   @keyframes floaty{
-    from{ transform: rotateX(0deg) rotateY(0deg) translateZ(0); }
-    to  { transform: rotateX(3deg) rotateY(-3deg) translateZ(6px); }
+    from{transform:rotateX(0deg) rotateY(0deg) translateZ(0);}
+    to  {transform:rotateX(3deg) rotateY(-3deg) translateZ(6px);}
   }
 
-  /* ====== LOGO ====== */
-  .logo{
-    text-align:center; margin-bottom: 10px;
-    transform: translateZ(35px);
-  }
-  .logo img{
-    width: 150px; height:auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
-  }
+  .logo{text-align:center;margin-bottom:10px;transform:translateZ(35px);}
+  .logo img{width:150px;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));}
 
-  /* ====== TÍTULO ====== */
-  h2{
-    text-align:center; margin: 8px 0 18px;
-    font-size: 1.75rem; font-weight: 800; letter-spacing:.3px;
-    color: var(--brand);
-    transform: translateZ(30px);
-  }
+  h2{text-align:center;margin:8px 0 18px;font-size:1.75rem;font-weight:800;letter-spacing:.3px;color:var(--brand);transform:translateZ(30px);}
 
-  /* ====== FORMULARIO ====== */
-  form{ transform: translateZ(25px); }
-
-  label{
-    display:block; font-weight: 700; margin-top: 12px; color: var(--brand);
-  }
-
+  form{transform:translateZ(25px);}
+  label{display:block;font-weight:700;margin-top:12px;color:var(--brand);}
   input, textarea{
-    width: 100%; margin-top: 6px; font-size: 16px;
-    padding: 12px 14px; border-radius: 14px;
-    border: 1px solid #c9d5e6; background: #fff;
+    width:100%;margin-top:6px;font-size:16px;padding:12px 14px;border-radius:14px;border:1px solid #c9d5e6;background:#fff;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.6), var(--shadow-2);
-    transition: border-color .25s ease, box-shadow .25s ease, transform .12s ease;
+    transition:border-color .25s ease, box-shadow .25s ease, transform .12s ease;
   }
-  textarea{ resize: vertical; min-height: 110px; }
+  textarea{resize:vertical;min-height:110px;}
+  input:focus, textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.6);transform:translateZ(5px);}
 
-  input:focus, textarea:focus{
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px var(--ring), inset 0 1px 0 rgba(255,255,255,.6);
-    transform: translateZ(5px);
-  }
-
-  /* ====== BOTÓN ====== */
   button{
-    width: 100%; margin-top: 18px;
-    padding: 14px 16px; border:0; cursor:pointer;
-    border-radius: 14px; color: #fff; font-weight: 800; font-size: 1.05rem; letter-spacing:.6px;
-    background: linear-gradient(90deg, var(--success-1), var(--success-2));
-    box-shadow: 0 10px 20px rgba(6,120,54,.35), inset 0 -2px 0 rgba(255,255,255,.25);
-    transition: transform .15s ease, box-shadow .25s ease, filter .25s ease;
-    transform: translateZ(20px);
+    width:100%;margin-top:18px;padding:14px 16px;border:0;cursor:pointer;border-radius:14px;color:#fff;font-weight:800;font-size:1.05rem;letter-spacing:.6px;
+    background:linear-gradient(90deg,var(--success-1),var(--success-2));
+    box-shadow:0 10px 20px rgba(6,120,54,.35), inset 0 -2px 0 rgba(255,255,255,.25);
+    transition:transform .15s ease, box-shadow .25s ease, filter .25s ease;transform:translateZ(20px);
   }
-  button:hover{
-    filter: brightness(1.03);
-    box-shadow: 0 14px 26px rgba(6,120,54,.45);
-    transform: translateZ(22px) translateY(-1px);
-  }
-  button:active{
-    transform: translateZ(12px) translateY(1px);
-  }
+  button:hover{filter:brightness(1.03);box-shadow:0 14px 26px rgba(6,120,54,.45);transform:translateZ(22px) translateY(-1px);}
+  button:active{transform:translateZ(12px) translateY(1px);}
 
-  /* ====== TEXTO BÍBLICO ====== */
-  .verse{
-    text-align:center; margin-top: 18px; font-weight: 600; color: var(--brand);
-    transform: translateZ(18px);
-  }
-  .address{
-    display:block; margin-top: 6px; font-size: .88rem; opacity: .78;
-  }
+  .verse{text-align:center;margin-top:18px;font-weight:600;color:var(--brand);transform:translateZ(18px);}
+  .address{display:block;margin-top:6px;font-size:.88rem;opacity:.78;}
 
-  /* ====== RESPONSIVE ====== */
-  @media (max-width: 420px){
-    .card{ padding: 22px 18px 26px; border-radius: 18px; }
-    h2{ font-size: 1.45rem; }
-  }
+  @media (max-width:420px){.card{padding:22px 18px 26px;border-radius:18px;}h2{font-size:1.45rem;}}
 </style>
 </head>
 
 <body>
-  <!-- Capa oscura para contraste (no toca tu background) -->
   <div class="overlay"></div>
 
-  <!-- Escenario 3D -->
   <div class="stage">
     <div class="card" aria-label="Tarjeta de petición de oración">
       <div class="logo">
@@ -198,18 +99,28 @@
 
       <h2>TARJETA DE PETICIÓN</h2>
 
+      <!-- ✅ FORM CORRECTO -->
       https://formspree.io/f/mqadoabv
+        <!-- Campos visibles -->
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
 
         <label for="peticion">Petición:</label>
         <textarea id="peticion" name="peticion" rows="4" required></textarea>
 
         <label for="correo">Correo (opcional):</label>
-        <input type="email" id="correo" name="correo" autocomplete="email">
+        <input id="correo" name="correo" type="email" autocomplete="email">
 
         <label for="telefono">Teléfono (opcional):</label>
-        <input type="tel" id="telefono" name="telefono" autocomplete="tel">
+        <input id="telefono" name="telefono" type="tel" autocomplete="tel">
+
+        <!-- Opcionales útiles para Formspree -->
+        <input type="hidden" name="_subject" value="Nueva petición de oración">
+        <!-- redirige después de enviar (opcional). Si no tienes /gracias.html, quita esta línea -->
+        <!-- <input type="hidden" name="_redirect" value="https://ibbgrmi.github.io/peticion/gracias.html"> -->
+
+        <!-- Honeypot anti-spam -->
+        <input type="text" name="_gotcha" style="display:none">
 
         <button type="submit">Enviar Petición</button>
       </form>
