@@ -4,116 +4,146 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tarjeta de Petición - Iglesia Bautista Bíblica</title>
+
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Helvetica Neue", sans-serif;
-    background: url('IMG_1846.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    color: #0a2b70;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  html, body{
+    margin:0;
+    padding:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Helvetica Neue",sans-serif;
+    background:url('IMG_1846.jpeg') no-repeat center center fixed;
+    background-size:cover;
+    color:#0a2b70;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
   }
-  .container {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    width: 90%;
-    max-width: 420px;
-    padding: 20px;
-  }
-  .logo {
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  .logo img {
-    width: 150px;
-    height: auto;
-  }
-  h2 {
-    text-align: center;
-    color: #0a2b70;
-    margin-bottom: 15px;
-  }
-  label {
-    display: block;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-  }
-  button {
-    width: 100%;
-    background-color: #0a9c4a;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-  button:hover {
-    background-color: #087a3b;
-  }
-  .verse {
-    text-align: center;
-    font-size: 15px;
-    color: #0a2b70;
-    margin-top: 15px;
-    font-weight: 600;
-  }
-  /* --- BOTÓN SMS HERMOSO --- */
-.sms-prayer-btn{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  margin-top:12px;
-  padding:14px;
-  border-radius:14px;
-  background: linear-gradient(135deg, #ffffff, #eef3ff);
-  border: 1px solid rgba(10,43,112,0.18);
-  color:#0a2b70;
-  text-decoration:none;
-  font-weight:800;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.10);
-}
 
-.sms-prayer-btn span{
-  margin-right:10px;
-}
+  .container{
+    background-color:rgba(255,255,255,0.95);
+    border-radius:15px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.25);
+    width:90%;
+    max-width:420px;
+    padding:20px;
+  }
 
-.sms-note{
-  text-align:center;
-  font-size:12.5px;
-  opacity:.85;
-  margin-top:6px;
-  color:#4a4a4a;
-}
+  .logo{
+    text-align:center;
+    margin-bottom:10px;
+  }
+
+  .logo img{
+    width:150px;
+    height:auto;
+  }
+
+  h2{
+    text-align:center;
+    color:#0a2b70;
+    margin-bottom:15px;
+  }
+
+  label{
+    display:block;
+    font-weight:bold;
+    margin-top:10px;
+  }
+
+  input, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+    box-sizing:border-box;
+  }
+
+  button{
+    width:100%;
+    background-color:#0a9c4a;
+    color:white;
+    border:none;
+    border-radius:10px;
+    padding:12px;
+    font-size:16px;
+    font-weight:bold;
+    margin-top:15px;
+  }
+  button:hover{ background-color:#087a3b; }
+
+  /* --- BOTÓN SMS (PRO) --- */
+  .sms-prayer-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    width:100%;
+    margin-top:10px;
+    padding:14px;
+    border-radius:14px;
+    background:linear-gradient(135deg,#ffffff,#eef3ff);
+    border:1px solid rgba(10,43,112,0.18);
+    color:#0a2b70;
+    text-decoration:none;
+    font-weight:800;
+    box-shadow:0 10px 22px rgba(0,0,0,0.10);
+    box-sizing:border-box;
+  }
+  .sms-prayer-btn span{ font-size:18px; }
+
+  .sms-note{
+    text-align:center;
+    font-size:12.5px;
+    opacity:.85;
+    margin-top:6px;
+    color:#4a4a4a;
+  }
+
+  .verse{
+    text-align:center;
+    font-size:15px;
+    color:#0a2b70;
+    margin-top:15px;
+    font-weight:600;
+  }
+
+  .site-reco{
+    text-align:center;
+    margin-top:12px;
+    font-size:13.5px;
+    color:#0a2b70;
+    font-weight:700;
+  }
+  .site-reco a{
+    color:#0a2b70;
+    text-decoration:underline;
+    font-weight:800;
+  }
 </style>
 </head>
+
 <body>
   <div class="container">
     <div class="logo">
       <img src="logo background removed.png" alt="Logo Iglesia Bautista Bíblica">
     </div>
+
     <h2>TARJETA DE PETICIÓN</h2>
+
     <form action="https://formspree.io/f/mqadoabv" method="POST">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required>
 
       <label for="peticion">Petición:</label>
       <textarea id="peticion" name="peticion" rows="4" required></textarea>
+
+      <!-- BOTÓN SMS ARRIBA (debajo de Petición) -->
+      <a class="sms-prayer-btn"
+         href="sms:+16162874503?&body=PETICI%C3%93N%20DE%20ORACI%C3%93N%20%E2%80%93%20Iglesia%20Bautista%20B%C3%ADblica%0A%0ANombre:%0APetici%C3%B3n:%0A%0A%C2%BFDesea%20que%20le%20contactemos%3F%20(S%C3%AD/No)">
+        <span>✍️</span> Enviar por Texto (SMS)
+      </a>
+      <div class="sms-note">Recomendado desde celular</div>
 
       <label for="correo">Correo (opcional):</label>
       <input type="email" id="correo" name="correo">
@@ -123,12 +153,17 @@
 
       <button type="submit">Enviar Petición</button>
     </form>
+
     <div class="verse">
       Tarjeta de Petición — “Al que cree todo le es posible.”<br>
       Marcos 9:23<br>
       <span style="font-size:13px;">1273 Lamont Ave. NW, Grand Rapids, MI 49504</span>
     </div>
+
+    <div class="site-reco">
+      Recomendación: visite nuestra página web:
+      <a href="https://iglesia-bautista-biblica.org" target="_blank" rel="noopener">iglesia-bautista-biblica.org</a>
+    </div>
   </div>
 </body>
-</script>
 </html>
